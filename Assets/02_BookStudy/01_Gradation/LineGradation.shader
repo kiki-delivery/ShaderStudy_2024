@@ -62,7 +62,8 @@ Shader "BookStudy/LineGradation"
 			half4 frag(v2f i) : SV_Target
 			{
 				// floor : 내림한 정수 리턴 내림 = 소수값 다 짜르기
-				float temp = floor((i.uv.y + _Time.x )* _LineCount) % 2 == 0 ? 1 : 0;
+				float2 uv = i.uv + _Time.x;
+				float temp = floor((uv.x + uv.y) * _LineCount) % 2 == 0 ? 1 : 0;
 				float4 color = lerp(_Color1, _Color2, temp);
 				return color;
 			}
